@@ -8,7 +8,7 @@
 
 body {
   height: 100vh;
-  background-image: url(/assets/images/pokemon-background.jpg);
+  background-image: url('/assets/images/pokemon-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
