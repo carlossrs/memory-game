@@ -1,30 +1,29 @@
-
 /* VARIABLES */
 
 let pokemon = [
-  { name: "bulbassaur", img: "assets/images/bulbassaur.png" },
-  { name: "bulbassaur", img: "assets/images/bulbassaur.png" },
-  { name: "caterpi", img: "assets/images/caterpi.png" },
-  { name: "caterpi", img: "assets/images/caterpi.png" },
-  { name: "charmander", img: "assets/images/charmander.png" },
-  { name: "charmander", img: "assets/images/charmander.png" },
-  { name: "eevee", img: "assets/images/eevee.png" },
-  { name: "eevee", img: "assets/images/eevee.png" },
-  { name: "jigglypuff", img: "assets/images/jigglypuff.png" },
-  { name: "jigglypuff", img: "assets/images/jigglypuff.png" },
-  { name: "lapras", img: "assets/images/lapras.png" },
-  { name: "lapras", img: "assets/images/lapras.png" },
-  { name: "metapod", img: "assets/images/metapod.png" },
-  { name: "metapod", img: "assets/images/metapod.png" },
-  { name: "pikachu", img: "assets/images/pikachu.png" },
-  { name: "pikachu", img: "assets/images/pikachu.png" },
-  { name: "squirtle", img: "assets/images/squirtle.png" },
-  { name: "squirtle", img: "assets/images/squirtle.png" },
-  { name: "zubat", img: "assets/images/zubat.png" },
-  { name: "zubat", img: "assets/images/zubat.png" },
+  { name: 'bulbassaur', img: 'assets/images/bulbassaur.png' },
+  { name: 'bulbassaur', img: 'assets/images/bulbassaur.png' },
+  { name: 'caterpi', img: 'assets/images/caterpi.png' },
+  { name: 'caterpi', img: 'assets/images/caterpi.png' },
+  { name: 'charmander', img: 'assets/images/charmander.png' },
+  { name: 'charmander', img: 'assets/images/charmander.png' },
+  { name: 'eevee', img: 'assets/images/eevee.png' },
+  { name: 'eevee', img: 'assets/images/eevee.png' },
+  { name: 'jigglypuff', img: 'assets/images/jigglypuff.png' },
+  { name: 'jigglypuff', img: 'assets/images/jigglypuff.png' },
+  { name: 'lapras', img: 'assets/images/lapras.png' },
+  { name: 'lapras', img: 'assets/images/lapras.png' },
+  { name: 'metapod', img: 'assets/images/metapod.png' },
+  { name: 'metapod', img: 'assets/images/metapod.png' },
+  { name: 'pikachu', img: 'assets/images/pikachu.png' },
+  { name: 'pikachu', img: 'assets/images/pikachu.png' },
+  { name: 'squirtle', img: 'assets/images/squirtle.png' },
+  { name: 'squirtle', img: 'assets/images/squirtle.png' },
+  { name: 'zubat', img: 'assets/images/zubat.png' },
+  { name: 'zubat', img: 'assets/images/zubat.png' },
 ];
 
-const boardDisplay = document.querySelector("#memory-board");
+const boardDisplay = document.querySelector('#memory-board');
 let hasFlippedCard = false;
 let firstCard;
 let secondCard;
@@ -35,24 +34,23 @@ let cardsFlipped = [];
 
 pokemon.sort(() => Math.random() - 0.5);
 
-
 /* CREATES CARDS AND BOARD */
 
 function startGame() {
   for (item of pokemon) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.addEventListener("click", flipCard);
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.addEventListener('click', flipCard);
 
-    const imageFront = document.createElement("img");
-    imageFront.setAttribute("src", item.img);
-    imageFront.setAttribute("data-name", item.name);
-    imageFront.setAttribute("data-id", pokemon.indexOf(item));
-    imageFront.classList.add("card-front");
+    const imageFront = document.createElement('img');
+    imageFront.setAttribute('src', item.img);
+    imageFront.setAttribute('data-name', item.name);
+    imageFront.setAttribute('data-id', pokemon.indexOf(item));
+    imageFront.classList.add('card-front');
 
-    const imageBack = document.createElement("img");
-    imageBack.setAttribute("src", "assets/images/pokeball.png");
-    imageBack.classList.add("card-back");
+    const imageBack = document.createElement('img');
+    imageBack.setAttribute('src', 'assets/images/pokeball.png');
+    imageBack.classList.add('card-back');
 
     boardDisplay.appendChild(card);
     card.appendChild(imageFront);
@@ -66,7 +64,7 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
-  this.classList.add("flip");
+  this.classList.add('flip');
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = this;
@@ -77,9 +75,9 @@ function flipCard() {
   hasFlippedCard = false;
   checkMatch();
   if (checkGameOver()) {
-    let gameOverlay = document.querySelector(".game-over");
+    let gameOverlay = document.querySelector('.game-over');
     setTimeout(() => {
-      gameOverlay.style.display = "flex";
+      gameOverlay.style.display = 'flex';
     }, 600);
   }
 }
@@ -88,8 +86,8 @@ function flipCard() {
 
 function checkMatch() {
   if (
-    firstCard.children[0].getAttribute("data-name") ===
-    secondCard.children[0].getAttribute("data-name")
+    firstCard.children[0].getAttribute('data-name') ===
+    secondCard.children[0].getAttribute('data-name')
   ) {
     disableCards();
     return;
@@ -101,9 +99,9 @@ function checkMatch() {
 /* DISABLES MATCHED CARDS */
 
 function disableCards() {
-  firstCard.removeEventListener("click", flipCard);
+  firstCard.removeEventListener('click', flipCard);
   cardsFlipped.push(firstCard);
-  secondCard.removeEventListener("click", flipCard);
+  secondCard.removeEventListener('click', flipCard);
   cardsFlipped.push(secondCard);
 
   resetBoard();
@@ -115,8 +113,8 @@ function unflipCards() {
   lockBoard = true;
 
   setTimeout(() => {
-    firstCard.classList.remove("flip");
-    secondCard.classList.remove("flip");
+    firstCard.classList.remove('flip');
+    secondCard.classList.remove('flip');
 
     resetBoard();
   }, 1000);
@@ -139,12 +137,13 @@ function checkGameOver() {
 /* RESTART THE GAME */
 
 function restart() {
-  document.querySelectorAll(".card").forEach((e) => e.remove());
-  startGame();
+  document.querySelectorAll('.card').forEach((e) => e.remove());
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
   cardsFlipped = [];
-  document.querySelector(".game-over").style.display = "none";
+  document.querySelector('.game-over').style.display = 'none';
+  pokemon.sort(() => Math.random() - 0.5);
+  startGame();
 }
 
 /* START GAME */
